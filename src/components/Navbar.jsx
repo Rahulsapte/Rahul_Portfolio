@@ -11,6 +11,7 @@ const navItems = [
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // 🔥 mobile menu state
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,24 +28,17 @@ export const Navbar = () => {
         "fixed w-full z-40 transition-all duration-300",
         isScrolled
           ? "py-3 bg-background/80 backdrop-blur-md shadow-sm"
-          : "py-5"
+          : "py-5",
       )}
     >
       <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-between">
-
         {/* Logo */}
-        <a
-          className="text-xl font-bold text-primary flex items-center"
-          href="#hero"
-        >
-          <span className="relative z-10">
-            <span className="text-glow text-foreground">Rahul_Sapte</span>{" "}
-            Portfolio
-          </span>
+        <a className="text-xl font-bold text-primary" href="#hero">
+          Rahul_Sapte Portfolio
         </a>
 
-        {/* Navigation Links */}
-        <div className="flex gap-8">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex gap-8">
           {navItems.map((item, key) => (
             <a
               key={key}
@@ -56,7 +50,27 @@ export const Navbar = () => {
           ))}
         </div>
 
+        {/* Mobile Hamburger */}
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)}>☰</button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-background/95 backdrop-blur-md px-6 pb-4">
+          {navItems.map((item, key) => (
+            <a
+              key={key}
+              href={item.href}
+              onClick={() => setIsOpen(false)} // auto close
+              className="block py-2 text-foreground/80 hover:text-primary"
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };
