@@ -27,10 +27,11 @@ export const Navbar = () => {
         "fixed w-full z-40 transition-all duration-300",
         isScrolled
           ? "py-3 bg-background/80 backdrop-blur-md shadow-sm"
-          : "py-5",
+          : "py-5"
       )}
     >
       <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-between">
+
         {/* Logo */}
         <a
           className="text-xl font-bold text-primary flex items-center"
@@ -42,7 +43,7 @@ export const Navbar = () => {
           </span>
         </a>
 
-        {/* Navigation Links (Always visible) */}
+        {/* Navigation Links */}
         <div className="flex gap-8">
           {navItems.map((item, key) => (
             <a
@@ -54,6 +55,7 @@ export const Navbar = () => {
             </a>
           ))}
         </div>
+
       </div>
     </nav>
   );
